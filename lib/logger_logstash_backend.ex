@@ -70,13 +70,13 @@ defmodule LoggerLogstashBackend do
       year, month, day, hour, minute, second, (milliseconds * 1000)
     )
     ts = Timex.to_datetime ts, Timezone.local
-    {:ok, json} = JSX.encode %{
+    {:ok, json} = Poison.encode %{
       type: type,
       "@timestamp": Timex.format!(ts, "{ISO:Extended}"),
       message: to_string(msg),
       fields: fields
     }
-    :gen_udp.send socket, host, port, to_charlist(json)
+    :gen_udp.send socket, host, port, json
   end
 
   defp configure(name, opts) do
