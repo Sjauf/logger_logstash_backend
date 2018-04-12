@@ -13,7 +13,7 @@ defmodule LoggerLogstashBackend.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :timex, :exjsx]]
+    [applications: [:logger, :timex]]
   end
 
   defp deps do
